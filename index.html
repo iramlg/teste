@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<meta charset=utf-8 />
+	<title>galery</title>
+	<link media="screen" rel="stylesheet" href="css/style.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
+	<script>
+    (function( $ ){
+
+        $.fn.galeria = function( options ) {  
+        
+        var settings = {
+          'thumbwidth' : 50,
+          'thumbheight' : 40
+        };
+
+
+        return this.each(function(){
+          if ( options ) {
+            $.extend( settings, options )
+          }
+
+          $("#content ul img").width(settings.thumbwidth).height(settings.thumbheight)
+            .css({cursor:"pointer"});
+          $("#content ul li").css({float:"left", margin:"1px"});
+
+          var image = '<div id="image_full"><img /></div>';
+          $("#content").append(image);
+          $("#image_full img").attr('src', $("#content img:first").attr('src'));
+          
+          $('#content img').click(function(){
+              $("#image_full").hide();
+              $("#image_full").html("<img src='"+$(this).attr('src')+"' />").fadeIn(500);
+            })
+          });
+        };
+      })( jQuery );
+
+
+		$(document).ready(function(){
+      $('#content').galeria({});
+			
+		});
+     
+	</script>
+</head>
+<body>
+  <div id="content">
+    <ul>
+  	  <li><img src="img/img1.jpg" alt="" /></a></li>
+      <li><img src="img/img2.jpg" alt="" /></a></li>
+      <li><img src="img/img3.jpg" alt="" /></a></li>
+      <li><img src="img/img4.jpg" alt="" /></a></li>
+      <li><img src="img/img5.jpg" alt="" /></a></li>
+    </ul>
+  </div>
+</body>
+</html>
